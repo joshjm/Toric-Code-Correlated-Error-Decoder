@@ -2,23 +2,23 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.interpolate import griddata
 import matplotlib.mlab as ml
-filename = 'highMT_l_3400_ac7e166d364445f7bc9d746582ee3392'
-dat = np.loadtxt('data/'+filename+'.txt' ,  delimiter=',', skiprows=1, unpack=False)
+filename = 'highMT_l_10000_6ae1878c5758453ab7400f00f7bc7882'
+dat = np.loadtxt('data/'+filename+'.txt' ,  delimiter=',', skiprows=1, usecols = (1,3,7), unpack=False)
 
-qfail = dat[:,6]
+qfail = dat[:,2]
 numsamples = 10000
 
 # Load data from CSV
 
-x = dat[:,1]
-y = dat[:,3]
+x = dat[:,0]
+y = dat[:,1]
 z = qfail
-xmin = 0
-xmax = 10
-nx = 20 #numer of steps
-ymin = 0
+xmin = 0 #expected
+xmax = 7
+nx = 30 #numer of steps
+ymin = 1 #variance
 ymax = 20
-ny = 20
+ny = 30
 xi = np.linspace(xmin, xmax, nx)
 yi = np.linspace(ymin, ymax, ny)
 zi = ml.griddata(x, y, z, xi, yi, 'linear')

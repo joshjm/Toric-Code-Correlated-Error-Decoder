@@ -1,0 +1,2 @@
+L, w_bar, strength, sigma_sq, anyons, N, p_failure 
+40, 20.0, 1, 20, 15, 32, 1.3974
