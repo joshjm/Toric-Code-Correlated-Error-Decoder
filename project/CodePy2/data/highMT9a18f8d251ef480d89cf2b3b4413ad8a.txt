@@ -1,0 +1,1 @@
+L, w_bar, strength, sigma_sq, anyons, N, q1 failure, q2 failure 

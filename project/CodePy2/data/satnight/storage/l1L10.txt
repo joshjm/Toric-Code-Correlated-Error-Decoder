@@ -1,0 +1,2 @@
+ anyons , CorrLen , q1 failure , q2 failure , Avg man dist, Avg Match Dist
+4,    4,    0.0,    0.0,    4.77777777778,    1.0

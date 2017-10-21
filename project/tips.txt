@@ -1,0 +1,13 @@
+submit work
+	batch script.sh 
+check work
+	squeue -u s4318965
+	squeue
+cancel work
+	qdel 	JOBID
+	scancel jobid_index
+	scancel -u s4318965     kill all by me
+list by creation date
+	ls -lt
+change port for ssh
+	ssh/scp -P port_number	

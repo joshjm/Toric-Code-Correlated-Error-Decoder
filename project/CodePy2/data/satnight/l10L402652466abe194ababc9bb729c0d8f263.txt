@@ -1,0 +1,1 @@
+ anyons , CorrLen , q1 failure , q2 failure , Avg man dist, Avg Match Dist, expected len

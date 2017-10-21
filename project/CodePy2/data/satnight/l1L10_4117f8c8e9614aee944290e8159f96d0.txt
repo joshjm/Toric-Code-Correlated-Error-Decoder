@@ -1,0 +1,20 @@
+anyons, CorrLen, exp len, q1 failure, q2 failure 
+0, 1, 0, 0.0, 0.0
+5, 1, 0, 0.0, 0.0
+10, 1, 0, 0.0, 1.0
+anyons, CorrLen, exp len, q1 failure, q2 failure 
+0, 1, 0, 0.0, 0.0
+5, 1, 0, 0.0, 0.0
+10, 1, 0, 0.0, 1.0
+anyons, CorrLen, exp len, q1 failure, q2 failure 
+0, 1, 0, 0.0, 0.0
+5, 1, 0, 0.0, 0.0
+10, 1, 0, 0.0, 1.0
+anyons, CorrLen, exp len, q1 failure, q2 failure 
+0, 1, 0, 0.0, 0.0
+5, 1, 0, 0.0, 0.0
+10, 1, 0, 0.0, 1.0
+anyons, CorrLen, exp len, q1 failure, q2 failure 
+0, 1, 0, 0.0, 0.0
+5, 1, 0, 0.0, 0.0
+10, 1, 0, 0.0, 1.0

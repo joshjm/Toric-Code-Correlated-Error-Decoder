@@ -1,0 +1,2 @@
+anyons, CorrLen, exp len, q1 failure, q2 failure 
+24, 1, 0, 221.5, 228.4

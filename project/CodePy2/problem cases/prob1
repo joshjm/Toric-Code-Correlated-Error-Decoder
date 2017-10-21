@@ -1,0 +1,15 @@
+Number of error chains: 4
+correlation length:2
+[[1, 0], [0, 0], [10, 0]]
+[[4, 6], [4, 7], [3, 7]]
+[[6, 9], [5, 9], [5, 10]]
+[[4, 2], [3, 2], [2, 2]]
+Traceback (most recent call last):
+  File "newmain.py", line 49, in <module>
+    ErrorArray = funmath.ApplyXErrors(ErrorRate,np.array(blankarray),errtype,L)
+  File "/home/joshua/Syncthing/Honours/PROJECT/Code/funmath.py", line 125, in ApplyXErrors
+    return(GetFlippedPoints(movements,array))
+  File "/home/joshua/Syncthing/Honours/PROJECT/Code/funmath.py", line 323, in GetFlippedPoints
+    blankarray[j[0]][1][j[1]] =-1
+IndexError: index 10 is out of bounds for axis 0 with size 10
+

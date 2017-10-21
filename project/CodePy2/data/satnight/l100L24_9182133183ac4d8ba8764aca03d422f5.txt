@@ -1,0 +1,2 @@
+ anyons , CorrLen , q1 failure , q2 failure, expected len
+120.96, 1,    0, 0.58,  0.53

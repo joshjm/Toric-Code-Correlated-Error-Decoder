@@ -1,0 +1,2 @@
+anyons, CorrLen, exp len, q1 failure, q2 failure 
+[1, 38], [1, 28], 0, 0.0, 0.0
