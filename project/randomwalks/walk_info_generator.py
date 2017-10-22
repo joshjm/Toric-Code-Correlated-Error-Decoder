@@ -2,8 +2,9 @@ import walks
 import numpy as np
 import sys
 import time
+import funmath
 file = open('manhat_pythag_data.txt','w')
-
+funmath.tic()
 pythag_data =[]
 manhat_data =[]
 N = 32
@@ -18,8 +19,9 @@ for i in range(outerrange):
         endpoint = [returned[2], returned[3]]
         manhat = str(abs(displacement[0])+abs(displacement[1]))
         pythag = str(np.sqrt(pow(displacement[0],2)+pow(displacement[1],2)))
-        
+
         file.write(manhat+', '+pythag+'\n')
-    sys.stdout.write("\r" +'percent done: '+ str(100.0*i/outerranger)+'  '+time.ctime())
+    sys.stdout.write("\r" +'percent done: '+ str(100.0*i/outerrange)+'  '+time.ctime())
     sys.stdout.flush()
 print('\n complete \n')
+funmath.toc()

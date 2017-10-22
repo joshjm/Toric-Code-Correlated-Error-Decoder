@@ -41,15 +41,15 @@ x = [i*max(manhat_data)/100.0 for i in range(0,100,1)]
 #print locations of max vals
 loc1 = x[np.argmax(pythag_dist.pdf(x))]
 loc2 = x[np.argmax(manhat_dist.pdf(x))]
-loc3 = x[np.argmax(pythag_dist2.pdf(x))]
-loc4 = x[np.argmax(manhat_dist2.pdf(x))]
-print('mac loc'+str([loc1, loc2, loc3, loc4]))
+
+print('mac loc'+str([loc1, loc2]))
 print('max vals '+str([(pythag_dist.pdf(loc1)), (manhat_dist.pdf(loc2)) ]))
 
 plt.plot(x, pythag_dist.pdf(x), color = 'b', label = "Pythagorean Density plot")
     #plot manhat distribution
 plt.plot(x, manhat_dist.pdf(x), color = 'r', label = "Manhattan Density plot")
-
+x = range(0,33,2)
+print([manhat_dist.pdf(i) for i in x ])
 
 #plot expected walk length line
 ymax = 0.2
