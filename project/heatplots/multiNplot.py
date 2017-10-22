@@ -3,7 +3,7 @@ import numpy as np
 import matplotlib.pyplot as plt
 from scipy.interpolate import griddata
 import matplotlib.mlab as ml
-filename = 'highMT_l_18000_13b760e3433c4560933c1216cd6774dc'
+filename = 'highMT_l_40000_cb85a9498bae460cbdb61a1a8df1a462'
 dat = np.loadtxt('data/'+filename+'.txt' ,  delimiter=',', skiprows=1, \
                   usecols = (1,3,4,7), unpack=False)
 
@@ -17,12 +17,13 @@ anyons = dat[:,2]
 qfail = dat[:,3]
 
 datadict = {}
+datadict[4] = {}
 datadict[8] = []
 datadict[12] = []
 datadict[16] = []
 for i in range(len(expected)):
     datadict[anyons[i]].append([expected[i],variance[i],qfail[i]])
-for i in [8,12,16]:
+for i in [4,8,12,16]:
     xmin = 4 #expected
     xmax = 7
     nx = 15 #numer of steps
