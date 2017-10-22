@@ -32,44 +32,24 @@ if __name__ == '__main__':
     #L = 4
     marker = itertools.cycle((',', '+', '.', 'o', '*'))
     funmath.tic()
-    N = 32
-    rawdata = np.loadtxt('manhat_pythag_data.txt' ,  delimiter=',', skiprows=0, unpack=False)
-    manhat_data = rawdata[:,0]
-    datadict = collections.defaultdict(float)
-    for i in manhat_data:
-        datadict[i] += 1
-    print(datadict)
-    yvals = []
-    for i in range(len(datadict)):
-        dicval = datadict[2*i]/len(manhat_data)
-        yvals.append(dicval)
-        print(dicval)
-    xvals = range(0,len(yvals)*2,2)
-    ###########################################################################
-    #for N in [4,8,16,32,64]:
-    for N in [32]:
+
+    for N in [8,16,32,64]:
         #print(Prob(N,L))
         x = [2*i for i in range(N/2+1)]
         y = [Prob(N,L) for L in x]
-        plt.plot(x,y, '.--', label  = 'Calculated Exact values')
+        plt.plot(x,y, marker =marker.next(), label  = 'N = '+str(N))
     ###########################################################################
-    plt.plot(xvals, yvals, '_', label  = 'Actual Walk Data' )
-    n = 1000*1000
-    z = 1.96
-    yerr = [1.0*z*np.sqrt((1.0/n)*p*(1.0-p)) for p in yvals]
+
     #plt.errorbar(xvals, yvals, yerr=yerr)
     plt.legend()
     plt.xlabel('Distance walked (L)')
     plt.ylabel('Probability density (1/L)')
     plt.suptitle('Probabiltiy of walk lengths')
-    plt.title('N = 32')
+    plt.title('Exact PDF calculation')
 
-    plt.savefig('figs/exactPDF.pdf')
+    plt.savefig('figs/exactPDFdemo.pdf')
     funmath.toc()
     sum2 = 0
-    for i,j  in zip(yvals,y[:len(yvals)]):
-        sum2 += np.sqrt(i*i + j*j)
-    print(sum2)
     plt.show()
     print(sum(y))
     ###########################################################################
