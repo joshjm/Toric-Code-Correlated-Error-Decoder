@@ -188,16 +188,16 @@ if __name__ == '__main__':
     parameters = []
         # set the correlation distance N and the number of anyons here
         #    NOTE they need to be the same length to be combined in combined
-    N = [32]  # 32 steps has expected walk length of 5.016
-    anyons = [4,8,12,16]
+    N = [32,32,32]  # 32 steps has expected walk length of 5.016
+    anyons = [8,12,16]
     combined = [[N[i], anyons[i]] for i in range(len(N))]
-    outer_loops = 1
+    outer_loops = 10
         # how many times to repeat for each set of values. allows you to
         # multithread each single value. set to high, if mostly running
         # for a single value to optimized speed. set lower if many
         # different sets of parameters are being run.
 
-    inner_loops = 100
+    inner_loops = 1800
         # essentially sets the accuracy of the failure rate for each
         # set of parameters. the pipe can get full if set too high.
         # try to catch failure if going above 500.
@@ -208,11 +208,13 @@ if __name__ == '__main__':
         for codesize in [40]:
             for errtype in [4]:
                 for strength in [1]:
-                    for variance in np.arange(1, 41, 1):
+                    for variance in np.arange(1, 15, 1):
                         for adjust in ['gauss']: #pythag, manhat, gauss or leastweight
                             for pair in combined:
-                                for expectedlength in np.arange(
-                                        0, 8.0, 0.2):
+                                for expectedlength in \
+                                    [5.016712342283284, 5.6568542494923806,
+                                    6.358192239869876, 5.1970956125713439,
+                                    4.2506712139429359]:
                                     # create an array of parameters, and then
                                     # apply all at once
                                     parameters.append([codesize,

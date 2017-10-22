@@ -2,6 +2,8 @@ import walks
 import numpy as np
 import funmath
 import math
+from scipy.stats import gamma
+
 file = open('exactexpectedlengths.txt','w')
 
 def nCr(n,r):
@@ -40,6 +42,35 @@ def walklengthcalc(N):
     file.write(str(N)+','+str(pythag_expected)+','+str(manhat_expected)+'\n')
     #funmath.toc()
     return([pythag_expected, manhat_expected, np.sqrt(N)])
-steps = int(input('walk length: '))
-lengths = walklengthcalc(steps)
-print(' pythag = '+str(lengths[0])+ '\n rt(N) = '+str(lengths[2])+' \n manhat = '+str(lengths[1]) )
+if __name__ =="__main__":
+    lengths = walklengthcalc(32)
+    print(' pythag = '+str(lengths[0])+ '\n rt(N) = '+str(lengths[2])+' \n manhat = '+str(lengths[1]) )
+
+    #gamma distribution stuff
+    file = open('gamma_info.txt','w')
+    loops = 1000000
+    N=32
+    rawdata = np.loadtxt('manhat_pythag_data.txt' ,  delimiter=',', skiprows=0, unpack=False)
+
+    manhat_data = rawdata[:,0]
+    pythag_data = rawdata[:,1]
+
+    #fit a gamma distribution
+        #to the pythag data
+    pythag_fit_alpha, pythag_fit_loc, pythag_fit_beta = gamma.fit(pythag_data)
+    pythag_dist = gamma(pythag_fit_alpha, pythag_fit_loc, pythag_fit_beta )
+        #to the manhat data
+    manhat_fit_alpha, manhat_fit_loc, manhat_fit_beta = gamma.fit(manhat_data)
+    manhat_dist = gamma(manhat_fit_alpha, manhat_fit_loc, manhat_fit_beta )
+    #save info
+    [pa,pl,pb] = [pythag_fit_alpha, pythag_fit_loc, pythag_fit_beta]
+    [ma,ml,mb] = [manhat_fit_alpha, manhat_fit_loc, manhat_fit_beta]
+    file.write(str(pythag_fit_alpha)+','+ str(pythag_fit_loc)+',' + str(pythag_fit_beta)+'\n')
+    file.write(str(manhat_fit_alpha)+','+ str(manhat_fit_loc)+',' + str(manhat_fit_beta)+'\n')
+    funmath.toc()
+
+    candidates = open('candidates.txt','w')
+    print('pythag, rt(N), manhat, manhat_gamma_max, py_gamma_max')
+    print([lengths[0], lengths[2], lengths[1], (ma-1.0)*mb+ml, (pa-1.0)*pb+pl])
+    candidates.write('pythag, rt(N), manhat, manhat_gamma_max, py_gamma_max \n')
+    candidates.write(str([lengths[0], lengths[2], lengths[1], (ma-1.0)*mb+ml, (pa-1.0)*pb+pl ])) #*b because its actuall theta!

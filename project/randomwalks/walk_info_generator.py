@@ -16,7 +16,10 @@ for i in range(outerrange):
         returned = walks.type4(array,L,N)
         displacement = [returned[0], returned[1]]
         endpoint = [returned[2], returned[3]]
-        file.write(str(abs(displacement[0])+abs(displacement[1]))+', '+str(np.sqrt(pow(displacement[0],2)+pow(displacement[1],2)))+'\n')
+        manhat = str(abs(displacement[0])+abs(displacement[1]))
+        pythag = str(np.sqrt(pow(displacement[0],2)+pow(displacement[1],2)))
+        
+        file.write(manhat+', '+pythag+'\n')
     sys.stdout.write("\r" +'percent done: '+ str(100.0*i/outerranger)+'  '+time.ctime())
     sys.stdout.flush()
 print('\n complete \n')
