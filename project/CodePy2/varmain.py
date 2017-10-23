@@ -197,7 +197,7 @@ if __name__ == '__main__':
         # for a single value to optimized speed. set lower if many
         # different sets of parameters are being run.
 
-    inner_loops = 1800
+    inner_loops = 100
         # essentially sets the accuracy of the failure rate for each
         # set of parameters. the pipe can get full if set too high.
         # try to catch failure if going above 500.
@@ -207,14 +207,12 @@ if __name__ == '__main__':
     for repeat in range(outer_loops):
         for codesize in [40]:
             for errtype in [4]:
-                for strength in [1]:
-                    for variance in np.arange(1, 15, 1):
-                        for adjust in ['gauss']: #pythag, manhat, gauss or leastweight
+                for strength in np.arange(0,1,0.1):
+                    for variance in [1]:#np.arange(1, 15, 1):
+                        for adjust in ['exactmanhat']: #pythag, manhat, gauss or leastweight
                             for pair in combined:
-                                for expectedlength in \
-                                    [5.016712342283284, 5.6568542494923806,
-                                    6.358192239869876, 5.1970956125713439,
-                                    4.2506712139429359]:
+                                for expectedlength in [1]:#\
+                                    #np.arange(0,8,0.5):
                                     # create an array of parameters, and then
                                     # apply all at once
                                     parameters.append([codesize,
@@ -232,7 +230,7 @@ if __name__ == '__main__':
     datadict = collections.defaultdict(float)
 
     maxq = 100  # determines how big the queue gets. tested to fail over 325.
-    maxrange = len(parameters) / maxq + 1
+    maxrange = int(len(parameters) / maxq + 1)
     counter = 0
     backup = open("backup.txt", 'w')
     # need to reduce total size, so queue doesnt get full.

@@ -11,8 +11,8 @@ def nCr(n,r):
     return f(n) / f(r) / f(n-r)
 
 def Prob(N,L):
-    s = range( (N-L)/2,      (N+L)/2+1,  1) #range doesnt include end point
-    p = range( (N-L)/2+1,    (N+L)/2,    1)
+    s = range( int((N-L)/2),      int((N+L)/2+1),  1) #range doesnt include end point
+    p = range( int((N-L)/2+1),    int((N+L)/2),    1)
     #print([s,p])
     sum1 = 0
     for i in s:
@@ -30,34 +30,44 @@ def Prob(N,L):
 
 if __name__ == '__main__':
     #L = 4
+
     marker = itertools.cycle((',', '+', '.', 'o', '*'))
     funmath.tic()
-    N = 32
-    rawdata = np.loadtxt('manhat_pythag_data.txt' ,  delimiter=',', skiprows=0, unpack=False)
-    manhat_data = rawdata[:,0]
-    datadict = collections.defaultdict(float)
-    for i in manhat_data:
-        datadict[i] += 1
-    print(datadict)
-    yvals = []
-    for i in range(len(datadict)):
-        dicval = datadict[2*i]/len(manhat_data)
-        yvals.append(dicval)
-        print(dicval)
-    xvals = range(0,len(yvals)*2,2)
+    # N = 32
+    #
+    # rawdata = np.loadtxt('manhat_pythag_data.txt' ,  delimiter=',', skiprows=0, unpack=False)
+    # manhat_data = rawdata[:,0]
+    # datadict = collections.defaultdict(float)
+    # for i in manhat_data:
+    #     datadict[i] += 1
+    # print(datadict)
+    # yvals = []
+    # for i in range(len(datadict)):
+    #     dicval = datadict[2*i]/len(manhat_data)
+    #     yvals.append(dicval)
+    #     print(dicval)
+    # xvals = range(0,len(yvals)*2,2)
     ###########################################################################
     #for N in [4,8,16,32,64]:
     for N in [32]:
-        #print(Prob(N,L))
-        x = [2*i for i in range(N/2+1)]
+        x = range(0,N+2,2)
         y = [Prob(N,L) for L in x]
         plt.plot(x,y, '.--', label  = 'Calculated Exact values')
+        pdf_data = open('PDF_data_N'+str(N)+'.txt', 'w')
+        
+        for i in range(len(x)):
+            pdf_data.write(str(x[i])+', ')
+        pdf_data.write('\n')
+        for i in range(len(x)):
+            pdf_data.write(str(y[i])+', ')
+        pdf_data.write('\n')
+
     ###########################################################################
-    plt.plot(xvals, yvals, '_', label  = 'Actual Walk Data' )
-    n = 1000*1000
-    z = 1.96
-    yerr = [1.0*z*np.sqrt((1.0/n)*p*(1.0-p)) for p in yvals]
-    #plt.errorbar(xvals, yvals, yerr=yerr)
+    # plt.plot(xvals, yvals, '_', label  = 'Actual Walk Data' )
+    # n = 1000*1000
+    # z = 1.96
+    # yerr = [1.0*z*np.sqrt((1.0/n)*p*(1.0-p)) for p in yvals]
+    # #plt.errorbar(xvals, yvals, yerr=yerr)
     plt.legend()
     plt.xlabel('Distance walked (L)')
     plt.ylabel('Probability density (1/L)')
@@ -67,9 +77,9 @@ if __name__ == '__main__':
     plt.savefig('figs/exactPDF.pdf')
     funmath.toc()
     sum2 = 0
-    for i,j  in zip(yvals,y[:len(yvals)]):
-        sum2 += np.sqrt(i*i + j*j)
-    print(sum2)
+    # for i,j  in zip(yvals,y[:len(yvals)]):
+    #     sum2 += np.sqrt(i*i + j*j)
+    # print(sum2)
     plt.show()
-    print(sum(y))
+    # print(sum(y))
     ###########################################################################

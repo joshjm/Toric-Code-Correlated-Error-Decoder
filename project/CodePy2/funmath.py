@@ -56,6 +56,7 @@ def adjustmatrix(
                 zM[i,j] = zM[i,j]*(1-pythag_gamma.pdf(zM[i,j]))
                 #zM[i,j] = (1-pythag_gamma.pdf(zM[i,j]))
         return(zM)
+
     elif adjust == 'manhat':
         #hardcoded gamma_info.txt
         data = [7.99846016186,-2.43529891285,0.931550822747]
@@ -67,8 +68,24 @@ def adjustmatrix(
                 zM[i,j] = zM[i,j]*(1-manhat_gamma.pdf(zM[i,j]))
                 #zM[i,j] = (1-manhat_gamma.pdf(zM[i,j]))
         return(zM)
+    elif adjust == 'exactmanhat':
+        #hardcoded gamma_info.txt
+        for i in range(zM.shape[0]):
+            for j in range(zM.shape[1]):
+                [pd, maxval] = manhat_lookup(zM[i,j])
+                zM[i,j] = zM[i,j]*(1.0-1.0*strength*pd/maxval)
+                #zM[i,j] = (1-manhat_gamma.pdf(zM[i,j]))
+        return(zM)
     elif adjust == 'leastweight':
         return(zM)
+
+def manhat_lookup(L):
+    P_L = [0.01958598405219258, 0.14313355819456994, 0.22530282308404537, 0.22768911663145647, 0.17606073792800336, 0.11053311711608983, 0.05797391705547113, 0.025769017688989173, 0.009751345195137569, 0.0031305638647595264, 0.0008436835708809402, 0.00018753360154666392, 3.348999377972294e-05, 4.619353498380733e-06, 4.619359359470124e-07, 2.980232172156159e-08, 9.313216864370617e-10]
+    try:#if length is a possible length
+        return(P_L[int(L)], max(P_L))
+    except: #if walk length impossibles
+        return(0, max(P_L))
+
 
 def randik(L):
     """randomized the value of Ri or Rj on a grid of dim L"""
@@ -836,3 +853,12 @@ def CreateGraph(m, n, refarray):
 if __name__ == '__main__':
     """if you put something in 'main' it will only run if the file
     is run; and not when the file is imported. """
+    #test vals for functions
+    zM = np.array([[ 0.,  3.],[ 3.,  0.]])
+    length = 1
+    L =32
+    strength = 1
+    variance = 1
+    adjust = 'exactmanhat'
+    zM = adjustmatrix(zM, length, L, strength, variance, adjust)
+    print(zM)
