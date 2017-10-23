@@ -191,13 +191,13 @@ if __name__ == '__main__':
     N = [32,32,32]  # 32 steps has expected walk length of 5.016
     anyons = [8,12,16]
     combined = [[N[i], anyons[i]] for i in range(len(N))]
-    outer_loops = 10
+    outer_loops = 100
         # how many times to repeat for each set of values. allows you to
         # multithread each single value. set to high, if mostly running
         # for a single value to optimized speed. set lower if many
         # different sets of parameters are being run.
 
-    inner_loops = 100
+    inner_loops = 1000
         # essentially sets the accuracy of the failure rate for each
         # set of parameters. the pipe can get full if set too high.
         # try to catch failure if going above 500.

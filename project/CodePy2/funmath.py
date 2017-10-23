@@ -53,7 +53,7 @@ def adjustmatrix(
         maxval = (1-data[0])/data[2]+data[1] #data[1] is a shift/loc location
         for i in range(zM.shape[0]):
             for j in range(zM.shape[1]):
-                zM[i,j] = zM[i,j]*(1-pythag_gamma.pdf(zM[i,j]))
+                zM[i,j] = 1.0*zM[i,j]*(1.0-pythag_gamma.pdf(zM[i,j]))
                 #zM[i,j] = (1-pythag_gamma.pdf(zM[i,j]))
         return(zM)
 
@@ -73,8 +73,8 @@ def adjustmatrix(
         for i in range(zM.shape[0]):
             for j in range(zM.shape[1]):
                 [pd, maxval] = manhat_lookup(zM[i,j])
-                zM[i,j] = zM[i,j]*(1.0-1.0*strength*pd/maxval)
-                #zM[i,j] = (1-manhat_gamma.pdf(zM[i,j]))
+                adjustdegree = (1.0-1.0*strength*pd/maxval)
+                zM[i,j] = 1.0*zM[i,j]*adjustdegree
         return(zM)
     elif adjust == 'leastweight':
         return(zM)
@@ -340,7 +340,7 @@ def Manhatten_Distance(vertices, m, n):
         vertices)  # convert vertices into matrix #is this necessary?
     # this code gets the manhatten distance; taking into account periodic
     # boundaries
-    zM = np.zeros((len(vertices), len(vertices)))
+    zM = np.zeros((len(vertices), len(vertices)),dtype=float)
     for i in range(len(vertices)):
         for j in range(len(vertices)):
             # need to test if distance over boundary is shorter than ~not
@@ -854,7 +854,7 @@ if __name__ == '__main__':
     """if you put something in 'main' it will only run if the file
     is run; and not when the file is imported. """
     #test vals for functions
-    zM = np.array([[ 0.,  3.],[ 3.,  0.]])
+    zM = np.array([[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]],dtype=float)
     length = 1
     L =32
     strength = 1
