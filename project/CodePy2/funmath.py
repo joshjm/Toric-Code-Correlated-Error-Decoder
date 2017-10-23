@@ -855,10 +855,11 @@ if __name__ == '__main__':
     is run; and not when the file is imported. """
     #test vals for functions
     zM = np.array([[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16,17]],dtype=float)
-    length = 1
+    length = 5
     L =32
     strength = 1
     variance = 1
-    adjust = 'exactmanhat'
+    adjust = 'gaussian'
+    print(adjust)
     zM = adjustmatrix(zM, length, L, strength, variance, adjust)
     print(zM)

@@ -188,16 +188,16 @@ if __name__ == '__main__':
     parameters = []
         # set the correlation distance N and the number of anyons here
         #    NOTE they need to be the same length to be combined in combined
-    N = [32,32,32]  # 32 steps has expected walk length of 5.016
-    anyons = [8,12,16]
+    N = [32]  # 32 steps has expected walk length of 5.016
+    anyons = [16] #next is 12
     combined = [[N[i], anyons[i]] for i in range(len(N))]
-    outer_loops = 100
+    outer_loops = 1
         # how many times to repeat for each set of values. allows you to
         # multithread each single value. set to high, if mostly running
         # for a single value to optimized speed. set lower if many
         # different sets of parameters are being run.
 
-    inner_loops = 1000
+    inner_loops = 47*100
         # essentially sets the accuracy of the failure rate for each
         # set of parameters. the pipe can get full if set too high.
         # try to catch failure if going above 500.
@@ -207,14 +207,14 @@ if __name__ == '__main__':
     for repeat in range(outer_loops):
         for codesize in [40]:
             for errtype in [4]:
-                for strength in np.arange(0,1,0.1):
-                    for variance in [1]:#np.arange(1, 15, 1):
-                        for adjust in ['exactmanhat']: #pythag, manhat, gauss or leastweight
+                for strength in [1]:#np.arange(0,1,0.1):
+                    for variance in np.arange(1, 17, 1):
+                        for adjust in ['gauss']: #pythag, manhat, gauss or leastweight
                             for pair in combined:
-                                for expectedlength in [1]:#\
-                                    #np.arange(0,8,0.5):
-                                    # create an array of parameters, and then
-                                    # apply all at once
+                                for expectedlength in np.arange(0,8,0.5):
+
+                                    #create an array of parameters, and then
+                                    #apply all at once
                                     parameters.append([codesize,
                                                        expectedlength,
                                                        strength,
